@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huake.sync.modules.sys.dao.SysOfficeInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.huake.modules.app.entity.SysOfficeInfoEntity" id="sysOfficeInfoMap">
+        <result property="ubiNum" column="ubi_num"/>
+        <result property="ubiCode" column="ubi_code"/>
+        <result property="ubiNo" column="ubi_no"/>
+        <result property="fullName" column="full_name"/>
+        <result property="shortName" column="short_name"/>
+        <result property="englishName" column="english_name"/>
+        <result property="ubiType" column="ubi_type"/>
+        <result property="pid" column="pid"/>
+        <result property="path" column="path"/>
+        <result property="ubiGrade" column="ubi_grade"/>
+        <result property="saiId" column="sai_id"/>
+        <result property="ubiAddress" column="ubi_address"/>
+        <result property="zipCode" column="zip_code"/>
+        <result property="ubiMaster" column="ubi_master"/>
+        <result property="primaryPerson" column="primary_person"/>
+        <result property="deputyPerson" column="deputy_person"/>
+        <result property="ubiTelephone" column="ubi_telephone"/>
+        <result property="ubiFax" column="ubi_fax"/>
+        <result property="ubiMail" column="ubi_mail"/>
+        <result property="ubiUrl" column="ubi_url"/>
+        <result property="filesImgUrl" column="files_img_url"/>
+        <result property="isShow" column="is_show"/>
+        <result property="sriId" column="sri_id"/>
+        <result property="sortno" column="sortno"/>
+        <result property="isState" column="is_state"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createId" column="create_id"/>
+        <result property="createName" column="create_name"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateId" column="update_id"/>
+        <result property="updateName" column="update_name"/>
+        <result property="ubiCredit" column="ubi_credit"/>
+        <result property="isGiftedClass" column="is_gifted_class"/>
+        <result property="ubiCreditname" column="ubi_creditName"/>
+        <result property="ubiCalendarFlag" column="ubi_calendar_flag"/>
+        <result property="calendarStartTime" column="calendar_start_time"/>
+        <result property="calendarEndTime" column="calendar_end_time"/>
+        <result property="ubiCreditFlag" column="ubi_credit_flag"/>
+        <result property="creditTimes" column="credit_times"/>
+        <result property="creditCycleTime" column="credit_cycle_time"/>
+        <result property="presentationId" column="presentation_id"/>
+        <result property="constitutionId" column="constitution_id"/>
+    </resultMap>
+
+    <select id="selectMaxSortNo" resultType="Integer">
+        SELECT max(sortno) from sys_office_info WHERE ubi_type=4
+    </select>
+
+</mapper>

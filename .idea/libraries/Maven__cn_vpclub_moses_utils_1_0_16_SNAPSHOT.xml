@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cn.vpclub:moses-utils:1.0.16-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://D:/maven/repository/cn/vpclub/moses-utils/1.0.16-SNAPSHOT/moses-utils-1.0.16-20190409.071330-38.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/maven/repository/cn/vpclub/moses-utils/1.0.16-SNAPSHOT/moses-utils-1.0.16-20190409.071330-38-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/maven/repository/cn/vpclub/moses-utils/1.0.16-SNAPSHOT/moses-utils-1.0.16-20190409.071330-38-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

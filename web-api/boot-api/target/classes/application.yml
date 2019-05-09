@@ -1,0 +1,102 @@
+server:
+  port: 9100
+  max-http-header-size: 9999
+  compression:
+    min-response-size: 2048
+    mime-types:
+    - image/png
+    - image/jpeg
+    - image/jpg
+    - application/javascript
+    - application/octet-stream
+    - application/json
+    - application/xml
+    - text/css
+    - text/html
+    - text/xml
+    - text/plain
+    - text/javascript
+    enabled: true
+  tomcat:
+    basedir: /home/vpclub/www-upload/temp
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: web-api
+
+  aop:
+    proxy-target-class: true
+
+  http:
+    encoding:
+      force: false
+      enabled: true
+      charset: utf-8
+    multipart:
+      #默认支持文件上传
+      enabled: true
+      #支持文件写入磁盘
+      file-size-threshold: 0
+      # 最大支持文件大小
+      max-file-size: 100Mb
+      # 最大支持请求大小
+      max-request-size: 100Mb
+      location: /home/vpclub/www-upload/temp
+  jackson:
+    default-property-inclusion: non_null
+
+
+
+#  mail:
+#    default-encoding: utf-8
+#    protocol: smtp
+#    host: smtp.exmail.qq.com
+#    port: 465
+#    username: mail-tzz@fun-net.cn
+#    password: QQ2018com
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            enable: true
+#      smtp:
+#        auth: true
+#        starttls:
+#          enable: true
+#          required: true
+
+  cache:
+    type: guava
+    cache-names:
+      - UserTokenCache
+      - WxTokenCache
+    guava.spec: maximumSize=10000, expireAfterWrite=100m  #90分钟
+
+
+ribbon:
+  eureka:
+    enabled: true
+
+#Feign服务
+feign-client:
+  activitybaseinfo-server: service-provider
+  activitycheckinfo-server: service-provider
+  admin-server: service-provider
+
+
+
+#微信配置
+wx:
+  appId: wx   #小程序ID
+  secret: 3ca  #小程序密钥
+  mchId:  14  #商户号
+  paySignKey: BX  #支付签名
+
+
+ali:
+  express:
+    appKey: 25
+    appSecret: 31
+    appCode: 586

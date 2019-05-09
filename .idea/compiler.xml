@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="activitybaseinfo-api" />
+        <module name="activitybaseinfo-provider" />
+        <module name="activitycheckinfo-api" />
+        <module name="activitycheckinfo-provider" />
+        <module name="admin-api" />
+        <module name="admin-provider" />
+        <module name="boot-api" />
+        <module name="boot-provider" />
+        <module name="common-eureka" />
+        <module name="common-feign" />
+        <module name="common-gateway" />
+        <module name="common-model" />
+        <module name="common-util" />
+        <module name="common-web-api" />
+        <module name="common-web-provider" />
+        <module name="order-provider" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="activitybaseinfo-api" target="1.8" />
+      <module name="activitybaseinfo-provider" target="1.8" />
+      <module name="activitycheckinfo-api" target="1.8" />
+      <module name="activitycheckinfo-provider" target="1.8" />
+      <module name="admin-api" target="1.8" />
+      <module name="admin-provider" target="1.8" />
+      <module name="bom" target="1.8" />
+      <module name="boot-api" target="1.8" />
+      <module name="boot-provider" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="common-eureka" target="1.8" />
+      <module name="common-feign" target="1.8" />
+      <module name="common-gateway" target="1.8" />
+      <module name="common-model" target="1.8" />
+      <module name="common-sms" target="1.5" />
+      <module name="common-util" target="1.8" />
+      <module name="common-web-api" target="1.8" />
+      <module name="common-web-provider" target="1.8" />
+      <module name="common-wechat" target="1.8" />
+      <module name="feign" target="1.8" />
+      <module name="service-provider" target="1.8" />
+      <module name="vpjoinin" target="1.8" />
+      <module name="web-api" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

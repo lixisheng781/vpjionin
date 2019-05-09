@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vpclub.vpjoinin:openapi-aliyun:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://D:/maven/repository/com/vpclub/vpjoinin/openapi-aliyun/1.0-SNAPSHOT/openapi-aliyun-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/maven/repository/com/vpclub/vpjoinin/openapi-aliyun/1.0-SNAPSHOT/openapi-aliyun-1.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/maven/repository/com/vpclub/vpjoinin/openapi-aliyun/1.0-SNAPSHOT/openapi-aliyun-1.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

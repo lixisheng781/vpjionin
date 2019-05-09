@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/web-api/activitybaseinfo-api/activitybaseinfo-api.iml" filepath="$PROJECT_DIR$/web-api/activitybaseinfo-api/activitybaseinfo-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/activitybaseinfo-provider/activitybaseinfo-provider.iml" filepath="$PROJECT_DIR$/service-provider/activitybaseinfo-provider/activitybaseinfo-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/activitycheckinfo.iml" filepath="$PROJECT_DIR$/web-api/activitycheckinfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/activitycheckinfo-api/activitycheckinfo-api.iml" filepath="$PROJECT_DIR$/web-api/activitycheckinfo-api/activitycheckinfo-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/activitycheckinfo-api.iml" filepath="$PROJECT_DIR$/web-api/activitycheckinfo-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/activitycheckinfo-provider/activitycheckinfo-provider.iml" filepath="$PROJECT_DIR$/service-provider/activitycheckinfo-provider/activitycheckinfo-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/admin-api/admin-api.iml" filepath="$PROJECT_DIR$/web-api/admin-api/admin-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/admin-provider/admin-provider.iml" filepath="$PROJECT_DIR$/service-provider/admin-provider/admin-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bom/bom.iml" filepath="$PROJECT_DIR$/bom/bom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/boot-api/boot-api.iml" filepath="$PROJECT_DIR$/web-api/boot-api/boot-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/boot-provider/boot-provider.iml" filepath="$PROJECT_DIR$/service-provider/boot-provider/boot-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-eureka/common-eureka.iml" filepath="$PROJECT_DIR$/common-eureka/common-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign/common-feign/common-feign.iml" filepath="$PROJECT_DIR$/feign/common-feign/common-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-gateway/common-gateway.iml" filepath="$PROJECT_DIR$/common-gateway/common-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-model/common-model.iml" filepath="$PROJECT_DIR$/common/common-model/common-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-sms/common-sms.iml" filepath="$PROJECT_DIR$/common-sms/common-sms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-util/common-util.iml" filepath="$PROJECT_DIR$/common/common-util/common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-web-api/common-web-api.iml" filepath="$PROJECT_DIR$/common/common-web-api/common-web-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-web-provider/common-web-provider.iml" filepath="$PROJECT_DIR$/common/common-web-provider/common-web-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feign/feign.iml" filepath="$PROJECT_DIR$/feign/feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-provider/service-provider.iml" filepath="$PROJECT_DIR$/service-provider/service-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vpjoinin.iml" filepath="$PROJECT_DIR$/.idea/vpjoinin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-api/web-api.iml" filepath="$PROJECT_DIR$/web-api/web-api.iml" />
+    </modules>
+  </component>
+</project>

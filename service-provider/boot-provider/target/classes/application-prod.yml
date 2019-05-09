@@ -1,0 +1,197 @@
+# 注册到eureka-server上
+eureka:
+  instance:
+    # 主机名称
+    hostname: ${spring.cloud.client.ipAddress}
+    # 自定义实例ID
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    # 显示IP地址
+    prefer-ip-address: true
+    # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+    # 过期剔除时间，即服务续约到期时间（缺省为90s）
+    lease-expiration-duration-in-seconds: 10
+  client:
+    # 是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true
+    # 客户端是否获取eureka服务器注册表上的注册信息，默认为true
+    fetch-registry: true
+    # 设置拉取服务注册信息时间（缺省为60s）
+    registry-fetch-interval-seconds: 30
+    # Eureka服务
+    serviceUrl:
+      #服务注册中心地址
+      defaultZone: http://127.0.0.1:8000/eureka/
+    healthcheck:
+      # 开启健康检查
+      enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+feign:
+  httpclient:
+    enabled: true
+
+
+
+spring:
+  #数据库源设置
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.0.0.43:3306/join_sys_config?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+    druid:
+      #初始化连接数量，最大最小连接数
+      initialSize: 5
+      maxActive: 10
+      minIdle: 3
+      #获取连接等待超时的时间
+      maxWait: 600000
+      #超过时间限制是否回收
+      removeAbandoned: true
+      #超过时间限制多长
+      removeAbandonedTimeout: 180
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 600000
+      #配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      #用来检测连接是否有效的sql，要求是一个查询语句
+      validationQuery: SELECT 1 FROM DUAL
+      #申请连接的时候检测
+      testWhileIdle: true
+      #申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+      testOnBorrow: false
+      #归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能
+      testOnReturn: false
+      #打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
+      #监控统计用的filter:stat 日志用的filter:log4j 防御SQL注入的filter:wall
+      filters:
+        filter:
+          stat:
+            enabled: false
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+            #db-type: sqlserver
+          slf4j:
+            enabled: false
+            connection-log-enabled: false
+            connection-close-after-log-enabled: false
+            connection-commit-after-log-enabled: false
+            connection-connect-after-log-enabled: false
+            connection-connect-before-log-enabled: false
+            connection-log-error-enabled: true
+            data-source-log-enabled: false
+            result-set-log-enabled: false
+            statement-log-enabled: true
+            statement-sql-pretty-format: true
+            statement-create-after-log-enabled: false
+            statement-close-after-log-enabled: false
+          wall:
+            enabled: false
+            config:
+              alter-table-allow: false
+              truncate-allow: false
+              drop-table-allow: false
+              #是否允许非以上基本语句的其他语句，缺省关闭，通过这个选项就能够屏蔽DDL
+              none-base-statement-allow: false
+              #检查UPDATE语句是否无where条件，这是有风险的，但不是SQL注入类型的风险
+              update-where-none-check: true
+              #SELECT ... INTO OUTFILE 是否允许，这个是mysql注入攻击的常见手段，缺省是禁止的
+              select-into-outfile-allow: false
+              #是否允许调用Connection.getMetadata方法，这个方法调用会暴露数据库的表信息
+              metadata-allow: true
+              #允许多条sql一起执行
+              multiStatementAllow: true
+            #对被认为是攻击的SQL进行LOG.error输出
+            log-violation: true
+            #对被认为是攻击的SQL抛出SQLExcepton
+            throw-exception: true
+            #db-type: mysql
+        web-stat-filter:
+          enabled: false
+          url-pattern: /*
+          exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+          #你可以配置principalSessionName，使得druid能够知道当前的cookie的用户是谁
+          #principal-cookie-name: admin
+          #你可以配置principalSessionName，使得druid能够知道当前的session的用户是谁
+          #principal-session-name: admin
+          #设置profileEnable能够监控单个url调用的sql列表。
+          profile-enable: true
+          #session统计功能
+          session-stat-enable: false
+          #最大session数
+          session-stat-max-count: 100000
+        stat-view-servlet:
+          #allow: ${GATEWAY_HOST:172.26.114.241}
+          enabled: false
+          login-username: ${DRUID_USER:admin}
+          login-password: ${DRUID_PWD:admin}
+          url-pattern: /druid/*
+          #允许清除记录
+          reset-enable: false
+        #aop-patterns: com.tdx.account_service.service.*
+
+#  mail:
+#    default-encoding: utf-8
+#    protocol: smtp
+#    host: smtp.163.com
+#    # host: smtp.exmail.qq.com
+#    port: 465
+#    username: tzz_funet@163.com
+#    # username: mail-tzz@fun-net.cn
+#    password: QQ2018com
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            enable: true
+#      smtp:
+#        auth: true
+#        starttls:
+#          enable: true
+#          required: true
+
+  # Redis配置
+  redis:
+    # redis服务器地址（默认为localhost）
+    host: 127.0.0.1
+    # redis端口（默认为6379）
+    port: 6379
+    # redis访问密码（默认为空）
+    password: 123qwe
+    # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 0
+    # 连接超时时间（毫秒）
+    timeout: 10000
+    pool:
+      # 最大空闲连接数（默认为8，负数表示无限）
+      max-idle: 20
+      # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+      min-idle: 5
+      # 最大可用连接数（默认为8，负数表示无限）
+      max-active: 20
+      # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+      max-wait: 2
+
+
+quartz:
+  cron:
+    couponProductExpireRefund: "0 0 21 * * ?"
+    couponProductItemSettle: "0 0 23 * * ?"
+    dailyAutoConfirmOrder: "0 0 */2 * * ?"
+    weekSettleReport: "0 0 1 * * MON"

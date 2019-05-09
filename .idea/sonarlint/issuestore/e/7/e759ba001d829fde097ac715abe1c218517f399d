@@ -1,0 +1,13 @@
+
+jsquid:UselessImportCheck"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Þ
+xsquid:UselessImportCheck"QRemove this unused import 'org.springframework.context.annotation.Configuration'.(¬²Úäþÿÿÿÿ
+^squid:UselessImportCheck"<Remove this unused import 'org.apache.http.ssl.SSLContexts'.(¶Ê§¡
+Rsquid:UselessImportCheck"0Remove this unused import 'java.io.InputStream'.(¹»º
+qsquid:UselessImportCheck"JRemove this unused import 'org.springframework.core.io.ClassPathResource'.(Ý¹º§ýÿÿÿÿ
+|squid:UselessImportCheck"URemove this unused import 'org.apache.http.conn.socket.PlainConnectionSocketFactory'.(šù‹Âýÿÿÿÿ
+Wsquid:UselessImportCheck"5Remove this unused import 'javax.net.ssl.SSLContext'.(ˆœ¤ë
+Tsquid:UselessImportCheck"3Remove this unused import 'java.security.KeyStore'.(ïººW
+qsquid:UselessImportCheck"ORemove this unused import 'org.springframework.beans.factory.annotation.Value'.(ìø›
+wsquid:UselessImportCheck"PRemove this unused import 'org.apache.http.conn.ssl.SSLConnectionSocketFactory'.(ÆÍ¦ýÿÿÿÿ
+jsquid:UselessImportCheck"CRemove this unused import 'org.apache.http.config.RegistryBuilder'.(â—²óûÿÿÿÿ
+rsquid:UselessImportCheck"PRemove this unused import 'org.apache.http.conn.socket.ConnectionSocketFactory'.(ÂžÚð

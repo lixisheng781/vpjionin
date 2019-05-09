@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huake.modules.app.dao.ActivityMemberInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.huake.modules.app.entity.ActivityMemberInfoEntity" id="activityMemberInfoMap">
+        <result property="amiNum" column="ami_num"/>
+        <result property="ubiId" column="ubi_id"/>
+        <result property="udiId" column="udi_id"/>
+        <result property="abiId" column="abi_id"/>
+        <result property="amiUserType" column="ami_user_type"/>
+        <result property="amiUserId" column="ami_user_id"/>
+        <result property="amiUserName" column="ami_user_name"/>
+        <result property="amiUserNo" column="ami_user_no"/>
+        <result property="amiAuditStatus" column="ami_audit_status"/>
+        <result property="isUpStandard" column="is_up_standard"/>
+        <result property="amiCredit" column="ami_credit"/>
+        <result property="amiGrade" column="ami_grade"/>
+        <result property="abiEndTime" column="abi_end_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateId" column="update_id"/>
+        <result property="updateName" column="update_name"/>
+        <result property="amiAllowId" column="ami_allow_id"/>
+        <result property="abiStatus" column="abi_status"/>
+    </resultMap>
+
+
+</mapper>
