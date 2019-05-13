@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * Created by chentao on 2018/5/31.
  */
-@RequestMapping(value = "/sysUserRoleClient")
-public interface SysUserRoleClient {
+@RequestMapping(value = "/userRoleInfoClient")
+public interface UserRoleInfoClient {
     /*@RequestMapping(value = "saveOrUpdate")
     void saveOrUpdate(@RequestParam("userId") Long userId, List<Long> roleIdList,Long createdBy);*/
 
