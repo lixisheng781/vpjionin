@@ -2,6 +2,7 @@ package com.vpclub.admin.client;
 
 
 import com.vpclub.admin.entity.SysUserInfoEntity;
+import com.vpclub.admin.service.UserRoleInfoService;
 import com.vpclub.result.ResponseResult;
 import com.vpclub.result.Result;
 import com.vpclub.result.ResultCodeEnum;
@@ -13,6 +14,7 @@ import com.vpclub.admin.model.request.PasswordForm;
 import com.vpclub.admin.model.request.SysUserParam;
 import com.vpclub.admin.service.SysUserInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +35,8 @@ public class SysUserInfoController extends AbstractController {
     @Autowired
     private SysUserInfoService sysUserInfoService;
 
-
+    @Autowired
+    private UserRoleInfoService userRoleInfoService;
 
 
     /**
@@ -59,7 +62,18 @@ public class SysUserInfoController extends AbstractController {
     public Result password(@RequestBody PasswordForm form) {
         Assert.isBlank(form.getNewPassword(), "新密码不为能空");
 
-
+//        //sha256加密
+//        String password = new Sha256Hash(form.getPassword(), getUser().getSalt()).toHex();
+//        //sha256加密
+//        String newPassword = new Sha256Hash(form.getNewPassword(), getUser().getSalt()).toHex();
+//
+//        //更新密码
+//        boolean flag = sysUserService.updatePassword(getUserId(), password, newPassword);
+//        if (!flag) {
+//            Result result = ResponseResult.failResult(ResultCodeEnum.SERVER_ERROR);
+//            result.setMsg("原密码不正确");
+//            return result;
+//        }
 
         return ResponseResult.success();
     }
@@ -96,6 +110,9 @@ public class SysUserInfoController extends AbstractController {
     public Result info(@RequestBody SysUserParam param){
         SysUserInfoEntity user = sysUserInfoService.selectById(param.getUserId());
 
+        //获取用户所属的角色列表
+        List<Long> roleIdList = userRoleInfoService.queryRoleIdList(param.getUserId());
+        user.setRoleIdList(roleIdList);
         return ResponseResult.success(user);
     }
 
@@ -151,15 +168,4 @@ public class SysUserInfoController extends AbstractController {
         return ResponseResult.success();
     }
 
-    @PostMapping("/queryByParentIdList")
-    public Result queryByParentIdList() {
-        Result result = ResponseResult.success();
-        //获取当前登陆用户信息
-        SysUserInfoEntity user = getUser();
-
-        List<SysUserInfoEntity> listParentId = new ArrayList<>();
-
-        result.setData(listParentId);
-        return result;
-    }
 }
