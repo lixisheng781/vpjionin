@@ -1,9 +1,9 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.entity.SysUserInfoEntity;
+import com.vpclub.admin.service.SysUserInfoService;
 import com.vpclub.result.Result;
-import com.vpclub.admin.entity.SysUserEntity;
 import com.vpclub.admin.model.request.SysUserParam;
-import com.vpclub.admin.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,75 +17,75 @@ import java.util.List;
 @RestController
 public class SysUserClientImpl implements SysUserClient {
     @Autowired
-    private SysUserService sysUserService;
+    private SysUserInfoService sysUserInfoService;
     @Override
-    public SysUserEntity queryByPhone(@RequestBody SysUserEntity mobileuser) {
-        return sysUserService.queryByPhone(mobileuser);
+    public SysUserInfoEntity queryByPhone(@RequestBody SysUserInfoEntity mobileuser) {
+        return sysUserInfoService.queryByPhone(mobileuser);
     }
 
     @Override
     public Result queryPage(@RequestBody SysUserParam params) {
-        return sysUserService.queryPage(params);
+        return sysUserInfoService.queryPage(params);
     }
 
     @Override
     public Result page(@RequestBody SysUserParam params) {
-        return sysUserService.page(params);
+        return sysUserInfoService.page(params);
     }
 
     @Override
     public List<String> queryAllPerms(@RequestParam Long userId) {
-        return sysUserService.queryAllPerms(userId);
+        return sysUserInfoService.queryAllPerms(userId);
     }
 
     @Override
     public List<Long> queryAllMenuId(@RequestParam Long userId) {
-        return sysUserService.queryAllMenuId(userId);
+        return sysUserInfoService.queryAllMenuId(userId);
     }
 
     @Override
 
-    public SysUserEntity queryByUserName(@RequestParam String userName) {
-        return sysUserService.queryByUserName(userName);
+    public SysUserInfoEntity queryByUserName(@RequestParam String userName) {
+        return sysUserInfoService.queryByUserName(userName);
     }
 
     @Override
-    public Result save(@RequestBody SysUserEntity user) {
-        return sysUserService.save(user);
+    public Result save(@RequestBody SysUserInfoEntity user) {
+        return sysUserInfoService.save(user);
     }
 
     @Override
-    public void update(@RequestBody SysUserEntity user) {
-        sysUserService.update(user);
+    public void update(@RequestBody SysUserInfoEntity user) {
+        sysUserInfoService.update(user);
     }
 
     @Override
     public void deleteBatch(@RequestParam Long[] userIds) {
-        sysUserService.deleteBatch(userIds);
+        sysUserInfoService.deleteBatch(userIds);
     }
 
     @Override
     public boolean updatePassword(@RequestParam Long userId, String password,  String newPassword) {
-        return sysUserService.updatePassword(userId,password,newPassword);
+        return sysUserInfoService.updatePassword(userId,password,newPassword);
     }
 
     @Override
     public void deleteByUserId(@RequestBody SysUserParam params) {
-        sysUserService.deleteByUserId(params.getIdList());
+        sysUserInfoService.deleteByUserId(params.getIdList());
     }
 
     @Override
-    public void register(@RequestBody SysUserEntity registerUser) {
-        sysUserService.register(registerUser);
+    public void register(@RequestBody SysUserInfoEntity registerUser) {
+        sysUserInfoService.register(registerUser);
     }
 
     @Override
-    public List<SysUserEntity> queryByParentId(@RequestParam String parentId) {
-        return sysUserService.queryByParentId(parentId);
+    public List<SysUserInfoEntity> queryByParentId(@RequestParam String parentId) {
+        return sysUserInfoService.queryByParentId(parentId);
     }
 
     @Override
-    public SysUserEntity selectById(@RequestParam("userId") Long userId) {
-        return sysUserService.selectById(userId);
+    public SysUserInfoEntity selectById(@RequestParam("userId") Long userId) {
+        return sysUserInfoService.selectById(userId);
     }
 }

@@ -17,14 +17,12 @@
 package com.vpclub.admin.service.impl;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vpclub.admin.dao.SysMenuDao;
-import com.vpclub.admin.entity.SysMenuEntity;
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.admin.service.SysMenuService;
  import com.vpclub.admin.service.SysUserService;
 import com.vpclub.admin.utils.Constant;
-import com.vpclub.admin.utils.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +39,7 @@ import java.util.List;
  */
 @Slf4j
 @Service("sysMenuService")
-public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, MenuBaseInfoEntity> implements SysMenuService {
 
 	@Autowired
 	private SysUserService sysUserService;
@@ -49,14 +47,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 
 
 	@Override
-	public List<SysMenuEntity> queryListParentId(Long parentId, List<Long> menuIdList) {
-		List<SysMenuEntity> menuList = queryListParentId(parentId);
+	public List<MenuBaseInfoEntity> queryListParentId(Long parentId, List<Long> menuIdList) {
+		List<MenuBaseInfoEntity> menuList = queryListParentId(parentId);
 		if(menuIdList == null){
 			return menuList;
 		}
 
-		List<SysMenuEntity> userMenuList = new ArrayList<>();
-		for(SysMenuEntity menu : menuList){
+		List<MenuBaseInfoEntity> userMenuList = new ArrayList<>();
+		for(MenuBaseInfoEntity menu : menuList){
 			if(menuIdList.contains(menu.getMenuId())){
 				userMenuList.add(menu);
 			}
@@ -65,17 +63,17 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 	}
 
 	@Override
-	public List<SysMenuEntity> queryListParentId(Long parentId) {
+	public List<MenuBaseInfoEntity> queryListParentId(Long parentId) {
 		return baseMapper.queryListParentId(parentId);
 	}
 
 	@Override
-	public List<SysMenuEntity> queryNotButtonList() {
+	public List<MenuBaseInfoEntity> queryNotButtonList() {
 		return baseMapper.queryNotButtonList();
 	}
 
 	@Override
-	public List<SysMenuEntity> getUserMenuList(Long userId) {
+	public List<MenuBaseInfoEntity> getUserMenuList(Long userId) {
 		//系统管理员，拥有最高权限
 		if(userId == Constant.SUPER_ADMIN){
 			return getAllMenuList(null);
@@ -87,7 +85,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 	}
 
 	@Override
-	public List<SysMenuEntity> getRoleMenuList(Long roleId) {
+	public List<MenuBaseInfoEntity> getRoleMenuList(Long roleId) {
 		//系统管理员，拥有管理员最高权限
 		if(roleId == Constant.SUPER_ADMIN){
 			return getAllMenuList(queryListType(1));
@@ -113,9 +111,9 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 	/**
 	 * 获取所有菜单列表
 	 */
-	private List<SysMenuEntity> getAllMenuList(List<Long> menuIdList){
+	private List<MenuBaseInfoEntity> getAllMenuList(List<Long> menuIdList){
 		//查询根菜单列表
-		List<SysMenuEntity> menuList = queryListParentId(0L, menuIdList);
+		List<MenuBaseInfoEntity> menuList = queryListParentId(0L, menuIdList);
 		//递归获取子菜单
 		getMenuTreeList(menuList, menuIdList);
 
@@ -125,10 +123,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuDao, SysMenuEntity> i
 	/**
 	 * 递归
 	 */
-	private List<SysMenuEntity> getMenuTreeList(List<SysMenuEntity> menuList, List<Long> menuIdList){
-		List<SysMenuEntity> subMenuList = new ArrayList<SysMenuEntity>();
+	private List<MenuBaseInfoEntity> getMenuTreeList(List<MenuBaseInfoEntity> menuList, List<Long> menuIdList){
+		List<MenuBaseInfoEntity> subMenuList = new ArrayList<MenuBaseInfoEntity>();
 
-		for(SysMenuEntity entity : menuList){
+		for(MenuBaseInfoEntity entity : menuList){
 			//目录
 			//if(entity.getMenuType() == Constant.MenuType.CATALOG.getValue()){
 				entity.setList(getMenuTreeList(queryListParentId(entity.getMenuId(), menuIdList), menuIdList));

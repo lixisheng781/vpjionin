@@ -1,11 +1,11 @@
 package com.vpclub.admin.service.impl;
 
 
-import com.vpclub.admin.dao.SysMenuDao;
-import com.vpclub.admin.dao.SysUserDao;
+import com.vpclub.admin.dao.MenuBaseInfoDao;
+import com.vpclub.admin.dao.SysUserInfoDao;
 import com.vpclub.admin.dao.SysUserTokenDao;
-import com.vpclub.admin.entity.SysMenuEntity;
-import com.vpclub.admin.entity.SysUserEntity;
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
+import com.vpclub.admin.entity.SysUserInfoEntity;
 import com.vpclub.admin.entity.SysUserTokenEntity;
 import com.vpclub.admin.service.ShiroService;
 import com.vpclub.admin.utils.Constant;
@@ -22,9 +22,9 @@ import java.util.*;
 @Slf4j
 public class ShiroServiceImpl implements ShiroService {
     @Autowired
-    private SysMenuDao sysMenuDao;
+    private MenuBaseInfoDao menuBaseInfoDao;
     @Autowired
-    private SysUserDao sysUserDao;
+    private SysUserInfoDao sysUserInfoDao;
     @Autowired
     private SysUserTokenDao sysUserTokenDao;
 
@@ -34,13 +34,13 @@ public class ShiroServiceImpl implements ShiroService {
 
         //系统管理员，拥有最高权限
         if(userId == Constant.SUPER_ADMIN){
-            List<SysMenuEntity> menuList = sysMenuDao.selectList(null);
+            List<MenuBaseInfoEntity> menuList = menuBaseInfoDao.selectList(null);
             permsList = new ArrayList<>(menuList.size());
-            for(SysMenuEntity menu : menuList){
+            for(MenuBaseInfoEntity menu : menuList){
 //                permsList.add(menu.getPerms());
             }
         }else{
-            permsList = sysUserDao.queryAllPerms(userId);
+            permsList = sysUserInfoDao.queryAllPerms(userId);
         }
         //用户权限列表
         Set<String> permsSet = new HashSet<>();
@@ -59,7 +59,7 @@ public class ShiroServiceImpl implements ShiroService {
     }
 
     @Override
-    public SysUserEntity queryUser(Long userId) {
-        return sysUserDao.selectById(userId);
+    public SysUserInfoEntity queryUser(Long userId) {
+        return sysUserInfoDao.selectById(userId);
     }
 }

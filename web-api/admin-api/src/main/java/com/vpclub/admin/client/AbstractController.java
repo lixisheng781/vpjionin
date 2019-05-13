@@ -1,7 +1,7 @@
 package com.vpclub.admin.client;
 
 
-import com.vpclub.admin.entity.SysUserEntity;
+import com.vpclub.admin.entity.SysUserInfoEntity;
 import com.vpclub.redis.RedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +23,15 @@ public abstract class AbstractController {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected SysUserEntity getUser() {
+	protected SysUserInfoEntity getUser() {
 		HttpServletRequest request = getRequest();
 		String token = request.getHeader("token");
-		SysUserEntity userEntity =  redis.get(token,SysUserEntity.class);
+		SysUserInfoEntity userEntity =  redis.get(token, SysUserInfoEntity.class);
 		return userEntity;
 	}
 
 	protected Long getUserId() {
-		return getUser().getUserId();
+		return getUser().getSysUserInfoId();
 	}
 
 

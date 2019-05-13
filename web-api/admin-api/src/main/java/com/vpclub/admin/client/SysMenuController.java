@@ -6,7 +6,7 @@ package com.vpclub.admin.client;
 import com.vpclub.result.ResponseResult;
 import com.vpclub.result.Result;
 import com.vpclub.result.ResultCodeEnum;
-import com.vpclub.admin.entity.SysMenuEntity;
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.admin.model.request.SysMenuParam;
 import com.vpclub.admin.model.response.MenuResponse;
 import com.vpclub.admin.service.ShiroService;
@@ -38,8 +38,8 @@ public class SysMenuController extends AbstractController {
 	@PostMapping("/nav")
 	public Result nav(@RequestParam("roleId") Long roleId) {
 		Result result = new Result();
-		//List<SysMenuEntity> menuList = sysMenuService.getUserMenuList(userId);
-		List<SysMenuEntity> menuList = sysMenuService.getRoleMenuList(roleId);
+		//List<MenuBaseInfoEntity> menuList = sysMenuService.getUserMenuList(userId);
+		List<MenuBaseInfoEntity> menuList = sysMenuService.getRoleMenuList(roleId);
 		//Set<String> permissions = shiroService.getUserPermissions(getUserId());
 
 		MenuResponse menuResponse = new MenuResponse();
@@ -54,13 +54,13 @@ public class SysMenuController extends AbstractController {
 	 * 所有菜单列表
 	 */
 	@PostMapping("/list")
-	public Result list(@RequestBody SysMenuEntity sysMenuEntity){
+	public Result list(@RequestBody MenuBaseInfoEntity menuBaseInfoEntity){
 		Result result = new Result();
-		List<SysMenuEntity> menuList = sysMenuService.selectList(sysMenuEntity);
-//		for(SysMenuEntity sysMenuEntity : menuList){
-//			SysMenuEntity parentMenuEntity = sysMenuService.selectById(sysMenuEntity.getParentId());
+		List<MenuBaseInfoEntity> menuList = sysMenuService.selectList(menuBaseInfoEntity);
+//		for(MenuBaseInfoEntity menuBaseInfoEntity : menuList){
+//			MenuBaseInfoEntity parentMenuEntity = sysMenuService.selectById(menuBaseInfoEntity.getParentId());
 //			if(parentMenuEntity != null){
-//				sysMenuEntity.setParentName(parentMenuEntity.getMenuName());
+//				menuBaseInfoEntity.setParentName(parentMenuEntity.getMenuName());
 //			}
 //		}
 		result = ResponseResult.success(menuList);
@@ -74,10 +74,10 @@ public class SysMenuController extends AbstractController {
 	public Result select() {
 		Result result = new Result();
 		//查询列表数据
-		List<SysMenuEntity> menuList = sysMenuService.queryNotButtonList();
+		List<MenuBaseInfoEntity> menuList = sysMenuService.queryNotButtonList();
 
 		//添加顶级菜单
-		SysMenuEntity root = new SysMenuEntity();
+		MenuBaseInfoEntity root = new MenuBaseInfoEntity();
 		root.setMenuId(0L);
 		root.setOpen(true);
 		menuList.add(root);
@@ -95,7 +95,7 @@ public class SysMenuController extends AbstractController {
 			result = ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST);
 			return result;
 		}else {
-			SysMenuEntity menu = sysMenuService.selectById(param.getMenuId());
+			MenuBaseInfoEntity menu = sysMenuService.selectById(param.getMenuId());
 			result = ResponseResult.success(menu);
 			return result;
 		}
@@ -105,7 +105,7 @@ public class SysMenuController extends AbstractController {
 	 * 保存
 	 */
 	@PostMapping("/save")
-	public Result save(@RequestBody SysMenuEntity menu){
+	public Result save(@RequestBody MenuBaseInfoEntity menu){
 		Result result = new Result();
 		//数据校验
 		verifyForm(menu);
@@ -118,7 +118,7 @@ public class SysMenuController extends AbstractController {
 	 * 修改
 	 */
 	@PostMapping("/update")
-	public Result update(@RequestBody SysMenuEntity menu){
+	public Result update(@RequestBody MenuBaseInfoEntity menu){
 		Result result = new Result();
 		//数据校验
 		verifyForm(menu);
@@ -143,7 +143,7 @@ public class SysMenuController extends AbstractController {
 			}
 
 			//判断是否有子菜单或按钮
-			List<SysMenuEntity> menuList = sysMenuService.queryListParentId(menuId);
+			List<MenuBaseInfoEntity> menuList = sysMenuService.queryListParentId(menuId);
 			if (menuList.size() > 0) {
 				result = ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"请先删除子菜单或按钮");
 				return result;
@@ -159,7 +159,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 验证参数是否正确
 	 */
-	private void verifyForm(SysMenuEntity menu) {
+	private void verifyForm(MenuBaseInfoEntity menu) {
 
 
 //		if(menu.getParentId() == null){
@@ -170,7 +170,7 @@ public class SysMenuController extends AbstractController {
 //		//上级菜单类型
 //		int parentType = Constant.MenuType.CATALOG.getValue();
 //		if(menu.getParentId() != 0){
-//			SysMenuEntity parentMenu = sysMenuService.selectById(menu.getParentId());
+//			MenuBaseInfoEntity parentMenu = sysMenuService.selectById(menu.getParentId());
 //			parentType = parentMenu.getMenuType();
 //		}
 //

@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vpclub.admin.dao.SysUserDao;
- import com.vpclub.admin.entity.SysUserEntity;
 import com.vpclub.admin.model.request.SysUserParam;
 import com.vpclub.admin.service.SysUserService;
 import com.vpclub.admin.utils.StringUtil;
@@ -27,7 +26,7 @@ import java.util.List;
 @Service
 @Transactional(rollbackFor = Exception.class)
 @Slf4j
-public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserInfoEntity> implements SysUserService {
 
 //	@Resource
 //	JavaMailSender jms;
@@ -37,16 +36,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 	@Override
 	public Result queryPage(SysUserParam params) {
-		Page<SysUserEntity> page = new Page<SysUserEntity>();
+		Page<SysUserInfoEntity> page = new Page<SysUserInfoEntity>();
 		if (StringUtil.isNotEmpty(params)){
 			page.setCurrent(params.getPageNumber());
 			page.setSize(params.getPageSize());
 		}
-		EntityWrapper<SysUserEntity> ew = new EntityWrapper<>();
+		EntityWrapper<SysUserInfoEntity> ew = new EntityWrapper<>();
 		ew.like(StringUtil.isNotEmpty(params.getUsername()), "username", params.getUsername());
 //		ew.eq(StringUtil.isNotEmpty(params.getMobile()),"mobile",params.getMobile());
 		ew.eq("deleted",1);
-		Page<SysUserEntity> selectPage = this.selectPage(page, ew);
+		Page<SysUserInfoEntity> selectPage = this.selectPage(page, ew);
 		return ResponseResult.success(selectPage);
 	}
 
@@ -61,15 +60,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	}
 
 	@Override
-	public SysUserEntity queryByUserName(String username) {
+	public SysUserInfoEntity queryByUserName(String username) {
 		return baseMapper.queryByUserName(username);
 	}
 
     @Override
-	public Result save(SysUserEntity user) {
+	public Result save(SysUserInfoEntity user) {
 		String username = user.getUsername();
-		SysUserEntity sysUserEntity = this.queryByUserName(username);
-		if(sysUserEntity!=null){
+		SysUserInfoEntity sysUserInfoEntity = this.queryByUserName(username);
+		if(sysUserInfoEntity !=null){
 			return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"该用户名已存在！");
 		}
 		Long nowTime = System.currentTimeMillis();
@@ -78,29 +77,29 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		String password = DigestUtils.sha1Hex(user.getPassword().trim()).toUpperCase();
 		user.setPassword(password);
 		//user.setSalt(salt);
-		this.insert((SysUserEntity) user);
+		this.insert((SysUserInfoEntity) user);
 
 		//检查角色是否越权
-		//checkRole((SysUserEntity) user);
+		//checkRole((SysUserInfoEntity) user);
 
 			return ResponseResult.success();
 	}
 
 	@Override
 	@Transactional
-	public void update(SysUserEntity sysUserEntity) {
+	public void update(SysUserInfoEntity sysUserInfoEntity) {
 
-		if(StringUtil.isEmpty(sysUserEntity.getPassword())){
-			sysUserEntity.setPassword(null);
+		if(StringUtil.isEmpty(sysUserInfoEntity.getPassword())){
+			sysUserInfoEntity.setPassword(null);
 		}else{
-			sysUserEntity.setPassword(DigestUtils.sha1Hex(sysUserEntity.getPassword().trim()).toUpperCase());
+			sysUserInfoEntity.setPassword(DigestUtils.sha1Hex(sysUserInfoEntity.getPassword().trim()).toUpperCase());
 		}
-		this.updateById(sysUserEntity);
+		this.updateById(sysUserInfoEntity);
 
 		//检查角色是否越权
-		//checkRole(sysUserEntity);
+		//checkRole(sysUserInfoEntity);
 		//保存用户与角色关系
-		//sysUserRoleService.saveOrUpdate(sysUserEntity.getUserId(), sysUserEntity.getRoleIdList(),sysUserEntity.getUpdatedBy());
+		//sysUserRoleService.saveOrUpdate(sysUserInfoEntity.getUserId(), sysUserInfoEntity.getRoleIdList(),sysUserInfoEntity.getUpdatedBy());
 	}
 
 	@Override
@@ -110,16 +109,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 	@Override
 	public boolean updatePassword(Long userId, String password, String newPassword) {
-		SysUserEntity userEntity = new SysUserEntity();
+		SysUserInfoEntity userEntity = new SysUserInfoEntity();
 		userEntity.setPassword(newPassword);
 		return this.update(userEntity,
-				new EntityWrapper<SysUserEntity>().eq("user_id", userId).eq("password", password));
+				new EntityWrapper<SysUserInfoEntity>().eq("user_id", userId).eq("password", password));
 	}
 
 	/**
 	 * 检查角色是否越权
 	 */
-	private void checkRole(SysUserEntity user){
+	private void checkRole(SysUserInfoEntity user){
 
 	}
 
@@ -133,20 +132,20 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	}
 
 	@Override
-	public void register(SysUserEntity registerUser) {
-//		baseMapper.addUser((SysUserEntity) registerUser);
+	public void register(SysUserInfoEntity registerUser) {
+//		baseMapper.addUser((SysUserInfoEntity) registerUser);
 		this.insert(registerUser);
 	}
 
 	@Override
-	public List<SysUserEntity> queryByParentId(String parentId) {
+	public List<SysUserInfoEntity> queryByParentId(String parentId) {
 		return baseMapper.queryByParentId(parentId);
 	}
 
     @Override
-	public SysUserEntity queryByPhone(SysUserEntity mobileuser) {
-		EntityWrapper<SysUserEntity> condition = new EntityWrapper<SysUserEntity>((SysUserEntity) mobileuser);
-		SysUserEntity user = this.selectOne(condition);
+	public SysUserInfoEntity queryByPhone(SysUserInfoEntity mobileuser) {
+		EntityWrapper<SysUserInfoEntity> condition = new EntityWrapper<SysUserInfoEntity>((SysUserInfoEntity) mobileuser);
+		SysUserInfoEntity user = this.selectOne(condition);
 		return user;
 	}
 
@@ -155,10 +154,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		Integer current = param.getPageNumber();
 		Integer size = param.getPageSize();
 		//分页对象封装
-		Page<SysUserEntity> page = new Page<>();
+		Page<SysUserInfoEntity> page = new Page<>();
 		page.setSize(size);
 		page.setCurrent(current);
-		List<SysUserEntity> list = this.baseMapper.page(page);
+		List<SysUserInfoEntity> list = this.baseMapper.page(page);
 		page.setRecords(list);
 		return ResponseResult.success(page);
 	}

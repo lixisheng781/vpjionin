@@ -18,8 +18,7 @@ package com.vpclub.admin.service;
 
 
 import com.baomidou.mybatisplus.service.IService;
-import com.vpclub.admin.entity.SysMenuEntity;
-import org.apache.ibatis.annotations.Param;
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 
 import java.util.List;
 
@@ -33,35 +32,35 @@ import java.util.List;
  * @since  2018-06-01
  *
  */
-public interface SysMenuService extends IService<SysMenuEntity> {
+public interface SysMenuService extends IService<MenuBaseInfoEntity> {
 
 	/**
 	 * 根据父菜单，查询子菜单
 	 * @param parentId 父菜单ID
 	 * @param menuIdList  用户菜单ID
 	 */
-	List<SysMenuEntity> queryListParentId(Long parentId, List<Long> menuIdList);
+	List<MenuBaseInfoEntity> queryListParentId(Long parentId, List<Long> menuIdList);
 
 	/**
 	 * 根据父菜单，查询子菜单
 	 * @param parentId 父菜单ID
 	 */
-	List<SysMenuEntity> queryListParentId(Long parentId);
+	List<MenuBaseInfoEntity> queryListParentId(Long parentId);
 	
 	/**
 	 * 获取不包含按钮的菜单列表
 	 */
-	List<SysMenuEntity> queryNotButtonList();
+	List<MenuBaseInfoEntity> queryNotButtonList();
 	
 	/**
 	 * 获取用户菜单列表
 	 */
-	List<SysMenuEntity> getUserMenuList(Long userId);
+	List<MenuBaseInfoEntity> getUserMenuList(Long userId);
 
 	/**
 	 * 获取角色菜单列表
 	 */
-	List<SysMenuEntity> getRoleMenuList(Long roleId);
+	List<MenuBaseInfoEntity> getRoleMenuList(Long roleId);
 
 	/**
 	 * 删除

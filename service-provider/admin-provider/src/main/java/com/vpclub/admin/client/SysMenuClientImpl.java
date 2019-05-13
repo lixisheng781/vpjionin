@@ -1,10 +1,10 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.result.ResponseResult;
 import com.vpclub.result.Result;
 import com.vpclub.result.ResultCodeEnum;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.vpclub.admin.entity.SysMenuEntity;
 import com.vpclub.admin.service.SysMenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,22 +29,22 @@ public class SysMenuClientImpl implements SysMenuClient {
     private SysMenuService sysMenuService;
 
     @Override
-    public List<SysMenuEntity> queryListParentId(@RequestBody Long parentId) {
+    public List<MenuBaseInfoEntity> queryListParentId(@RequestBody Long parentId) {
         return sysMenuService.queryListParentId(parentId);
     }
 
     @Override
-    public List<SysMenuEntity> queryNotButtonList() {
+    public List<MenuBaseInfoEntity> queryNotButtonList() {
         return sysMenuService.queryNotButtonList();
     }
 
     @Override
-    public List<SysMenuEntity> getUserMenuList(Long userId) {
+    public List<MenuBaseInfoEntity> getUserMenuList(Long userId) {
         return sysMenuService.getUserMenuList(userId);
     }
 
     @Override
-    public List<SysMenuEntity> getRoleMenuList(Long roleId) {
+    public List<MenuBaseInfoEntity> getRoleMenuList(Long roleId) {
         return sysMenuService.getRoleMenuList(roleId);
     }
 
@@ -54,19 +54,19 @@ public class SysMenuClientImpl implements SysMenuClient {
     }
 
     @Override
-    public List<SysMenuEntity> selectList(@RequestBody SysMenuEntity sysMenuEntity) {
-        log.info("sysMenuEntity:    " + sysMenuEntity);
-        EntityWrapper<SysMenuEntity> ew = new EntityWrapper(sysMenuEntity);
+    public List<MenuBaseInfoEntity> selectList(@RequestBody MenuBaseInfoEntity menuBaseInfoEntity) {
+        log.info("menuBaseInfoEntity:    " + menuBaseInfoEntity);
+        EntityWrapper<MenuBaseInfoEntity> ew = new EntityWrapper(menuBaseInfoEntity);
         return sysMenuService.selectList(ew);
     }
 
     @Override
-    public SysMenuEntity selectById(@RequestBody Long parentId) {
+    public MenuBaseInfoEntity selectById(@RequestBody Long parentId) {
         return sysMenuService.selectById(parentId);
     }
 
     @Override
-    public Result insert(@RequestBody SysMenuEntity menu) {
+    public Result insert(@RequestBody MenuBaseInfoEntity menu) {
         Result result = new Result();
         long now = new Date().getTime();
 //        menu.setCreatedTime(now);
@@ -81,7 +81,7 @@ public class SysMenuClientImpl implements SysMenuClient {
     }
 
     @Override
-    public Result updateById(@RequestBody SysMenuEntity menu) {
+    public Result updateById(@RequestBody MenuBaseInfoEntity menu) {
         Result result = new Result();
 //        menu.setUpdatedTime(new Date().getTime());
         boolean back = sysMenuService.updateById(menu);

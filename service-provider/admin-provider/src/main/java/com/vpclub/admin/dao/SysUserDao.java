@@ -2,7 +2,6 @@ package com.vpclub.admin.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.vpclub.admin.entity.SysUserEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  * @date 2016年9月18日 上午9:34:11
  */
 @Repository
-public interface SysUserDao extends BaseMapper<SysUserEntity> {
+public interface SysUserDao extends BaseMapper<SysUserInfoEntity> {
 	
 	/**
 	 * 查询用户的所有权限
@@ -31,22 +30,22 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	/**
 	 * 根据用户名，查询系统用户
 	 */
-	SysUserEntity queryByUserName(String username);
+	SysUserInfoEntity queryByUserName(String username);
 
 	void deleteByUserIds(List<Long> ids);
 
 	/**
 	 * 添加新用户
 	 */
-	void addUser(SysUserEntity userEntity);
+	void addUser(SysUserInfoEntity userEntity);
 
 	/**
 	 * 查询主账号下所有子账号
 	 */
-	List<SysUserEntity> queryByParentId(String parentId);
+	List<SysUserInfoEntity> queryByParentId(String parentId);
 
 	/**
 	 * 分页查询用户列表
 	 */
-	List<SysUserEntity> page(Pagination page);
+	List<SysUserInfoEntity> page(Pagination page);
 }

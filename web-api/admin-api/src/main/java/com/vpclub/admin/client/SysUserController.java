@@ -8,7 +8,6 @@ import com.vpclub.admin.common.validator.Assert;
 import com.vpclub.admin.common.validator.ValidatorUtils;
 import com.vpclub.admin.common.validator.group.AddGroup;
 import com.vpclub.admin.common.validator.group.UpdateGroup;
-import com.vpclub.admin.entity.SysUserEntity;
 import com.vpclub.admin.model.request.PasswordForm;
 import com.vpclub.admin.model.request.SysUserParam;
 import com.vpclub.admin.service.SysUserService;
@@ -72,7 +71,7 @@ public class SysUserController extends AbstractController {
         Result result = ResponseResult.success();
         try {
             Long userId = this.getUserId();
-            SysUserEntity user;
+            SysUserInfoEntity user;
             if (null != userId && userId.intValue() > 0) {
 
                 user = sysUserService.selectById(userId);
@@ -94,7 +93,7 @@ public class SysUserController extends AbstractController {
      */
     @PostMapping("/querUserinfo")
     public Result info(@RequestBody SysUserParam param){
-        SysUserEntity user = sysUserService.selectById(param.getUserId());
+        SysUserInfoEntity user = sysUserService.selectById(param.getUserId());
 
         return ResponseResult.success(user);
     }
@@ -103,7 +102,7 @@ public class SysUserController extends AbstractController {
      * 保存用户
      */
     @PostMapping("/save")
-    public Result save(@RequestBody SysUserEntity user) {
+    public Result save(@RequestBody SysUserInfoEntity user) {
         ValidatorUtils.validateEntity(user, AddGroup.class);
         log.info("user: " + user.toString());
 
@@ -114,7 +113,7 @@ public class SysUserController extends AbstractController {
      * 修改用户密码
      */
     @PostMapping("/update")
-    public Result update(@RequestBody SysUserEntity user) {
+    public Result update(@RequestBody SysUserInfoEntity user) {
         try {
             ValidatorUtils.validateEntity(user, UpdateGroup.class);
 
@@ -155,9 +154,9 @@ public class SysUserController extends AbstractController {
     public Result queryByParentIdList() {
         Result result = ResponseResult.success();
         //获取当前登陆用户信息
-        SysUserEntity user = getUser();
+        SysUserInfoEntity user = getUser();
 
-        List<SysUserEntity> listParentId = new ArrayList<>();
+        List<SysUserInfoEntity> listParentId = new ArrayList<>();
 
         result.setData(listParentId);
         return result;

@@ -18,7 +18,7 @@ package com.vpclub.admin.dao;
 
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.vpclub.admin.entity.SysMenuEntity;
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,18 +31,18 @@ import java.util.List;
  * @since  2018-06-01
  */
 @Repository
-public interface SysMenuDao extends BaseMapper<SysMenuEntity> {
+public interface SysMenuDao extends BaseMapper<MenuBaseInfoEntity> {
 
 	/**
 	 * 根据父菜单，查询子菜单
 	 * @param parentId 父菜单ID
 	 */
-	List<SysMenuEntity> queryListParentId(@Param("parentId") Long parentId);
+	List<MenuBaseInfoEntity> queryListParentId(@Param("parentId") Long parentId);
 
 	/**
 	 * 获取不包含按钮的菜单列表
 	 */
-	List<SysMenuEntity> queryNotButtonList();
+	List<MenuBaseInfoEntity> queryNotButtonList();
 
 	/**
 	 * 根据菜单类型，查询菜单列表

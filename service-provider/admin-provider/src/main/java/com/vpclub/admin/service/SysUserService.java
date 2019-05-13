@@ -4,7 +4,6 @@ package com.vpclub.admin.service;
 
 import com.vpclub.result.Result;
 import com.baomidou.mybatisplus.service.IService;
-import com.vpclub.admin.entity.SysUserEntity;
 import com.vpclub.admin.model.request.SysUserParam;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:43:39
  */
-public interface SysUserService extends IService<SysUserEntity> {
+public interface SysUserService extends IService<SysUserInfoEntity> {
 
 	Result queryPage(SysUserParam params);
 
@@ -35,17 +34,17 @@ public interface SysUserService extends IService<SysUserEntity> {
 	/**
 	 * 根据用户名，查询系统用户
 	 */
-	SysUserEntity queryByUserName(String username);
+	SysUserInfoEntity queryByUserName(String username);
 
 	/**
 	 * 保存用户
 	 */
-	Result save(SysUserEntity user);
+	Result save(SysUserInfoEntity user);
 	
 	/**
 	 * 修改用户
 	 */
-	void update(SysUserEntity user);
+	void update(SysUserInfoEntity user);
 
 	/**
 	 * 删除用户
@@ -65,14 +64,14 @@ public interface SysUserService extends IService<SysUserEntity> {
 	 */
 	void deleteByUserId(List<Long> ids);
 
-	void register(SysUserEntity registerUser);
+	void register(SysUserInfoEntity registerUser);
 
 	/**
 	 * 查询主账号下所有子账号
 	 */
-	List<SysUserEntity> queryByParentId(String parentId);
+	List<SysUserInfoEntity> queryByParentId(String parentId);
 
-	SysUserEntity queryByPhone(SysUserEntity mobileuser);
+	SysUserInfoEntity queryByPhone(SysUserInfoEntity mobileuser);
 
 	/**
 	 * 分页查询用户列表

@@ -17,12 +17,12 @@
 		where ur.user_id = #{userId}
 	</select>
 	
-	<select id="queryByUserName" resultType="com.vpclub.admin.entity.SysUserEntity">
+	<select id="queryByUserName" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
 		select * from sys_user where username = #{username} and deleted = 1
 	</select>
 
 	<!-- 查询主账户下所有子账号 -->
-	<select id="queryByParentId" resultType="com.vpclub.admin.entity.SysUserEntity">
+	<select id="queryByParentId" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
 		SELECT * from sys_user_info where parent_id = {parentId}
 	</select>
 
@@ -38,12 +38,12 @@
 		</foreach>
 	</update>
 
-	<insert id="addUser" parameterType="com.vpclub.admin.entity.SysUserEntity">
+	<insert id="addUser" parameterType="com.vpclub.admin.entity.SysUserInfoEntity">
 		insert into sys_user_info(user_id,parent_id,username,password,salt,mobile,create_user_id,created_time)
 		 VALUES (#{userId},#{parentId},#{username},#{password},#{salt},#{mobile},#{createUserId},#{createdTime})
 	</insert>
 
-	<select id="page" resultType="com.vpclub.admin.entity.SysUserEntity">
+	<select id="page" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
 		SELECT u.* FROM sys_user_info u
 
 	</select>

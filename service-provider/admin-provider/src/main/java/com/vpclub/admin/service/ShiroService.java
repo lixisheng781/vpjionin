@@ -1,6 +1,6 @@
 package com.vpclub.admin.service;
 
-import com.vpclub.admin.entity.SysUserEntity;
+import com.vpclub.admin.entity.SysUserInfoEntity;
 import com.vpclub.admin.entity.SysUserTokenEntity;
 import java.util.Set;
 
@@ -19,5 +19,5 @@ public interface ShiroService {
      * 根据用户ID，查询用户
      * @param userId
      */
-    SysUserEntity queryUser(Long userId);
+    SysUserInfoEntity queryUser(Long userId);
 }

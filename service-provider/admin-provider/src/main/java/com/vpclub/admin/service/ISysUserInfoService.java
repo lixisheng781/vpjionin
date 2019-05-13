@@ -3,7 +3,7 @@ package com.vpclub.admin.service;
 import com.baomidou.mybatisplus.service.IService;
 import com.vpclub.admin.domain.OrgDTO;
 import com.vpclub.admin.domain.UserParam;
-import com.vpclub.admin.entity.SysUserInfo;
+import com.vpclub.admin.entity.SysUserInfoEntity;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import java.util.List;
  * @author jobob
  * @since 2019-02-22
  */
-public interface ISysUserInfoService extends IService<SysUserInfo> {
+public interface ISysUserInfoService extends IService<SysUserInfoEntity> {
 
-	SysUserInfo getSysUserInfo(Long id);
+	SysUserInfoEntity getSysUserInfo(Long id);
 
     List<OrgDTO> queryByUserIdAndSchoolId(UserParam userParam);
 }

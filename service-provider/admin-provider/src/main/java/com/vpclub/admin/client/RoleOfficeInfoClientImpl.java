@@ -1,9 +1,7 @@
 package com.vpclub.admin.client;
 
 
-import com.vpclub.admin.entity.RoleMenuInfoEntity;
 import com.vpclub.admin.entity.RoleOfficeInfoEntity;
-import com.vpclub.admin.service.RoleMenuInfoService;
 import com.vpclub.admin.service.RoleOfficeInfoService;
 import com.vpclub.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
