@@ -1,7 +1,7 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.entity.SysUserInfoEntity;
 import com.vpclub.result.Result;
-import com.vpclub.admin.entity.SysUserEntity;
 import com.vpclub.admin.model.request.SysUserParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,7 @@ public interface SysUserClient  {
 
 
     @RequestMapping(value = "queryByPhone",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    SysUserEntity queryByPhone(@RequestBody SysUserEntity mobileuser);
+    SysUserInfoEntity queryByPhone(@RequestBody SysUserInfoEntity mobileuser);
 
     @RequestMapping(value = "queryPage",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     Result queryPage(@RequestBody SysUserParam params);
@@ -44,19 +44,19 @@ public interface SysUserClient  {
      * 根据用户名，查询系统用户
      */
     @RequestMapping(value = "queryByUserName",method = RequestMethod.GET)
-    SysUserEntity queryByUserName(@RequestParam("userName") String userName);
+    SysUserInfoEntity queryByUserName(@RequestParam("userName") String userName);
 
     /**
      * 保存用户
      */
     @RequestMapping(value = "save",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result save(@RequestBody SysUserEntity user);
+    Result save(@RequestBody SysUserInfoEntity user);
 
     /**
      * 修改用户
      */
     @RequestMapping(value = "update",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    void update(@RequestBody SysUserEntity user);
+    void update(@RequestBody SysUserInfoEntity user);
 
     /**
      * 删除用户
@@ -79,14 +79,14 @@ public interface SysUserClient  {
     @RequestMapping(value = "deleteByUserId",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     void deleteByUserId(@RequestBody SysUserParam params);
     @RequestMapping(value = "register",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    void register(@RequestBody SysUserEntity registerUser);
+    void register(@RequestBody SysUserInfoEntity registerUser);
 
     /**
      * 查询主账号下所有子账号
      */
     @RequestMapping(value = "queryByParentId")
-    List<SysUserEntity> queryByParentId(@RequestParam("parentId") String parentId);
+    List<SysUserInfoEntity> queryByParentId(@RequestParam("parentId") String parentId);
 
     @RequestMapping(value = "selectById")
-    SysUserEntity selectById(@RequestParam("userId") Long userId);
+    SysUserInfoEntity selectById(@RequestParam("userId") Long userId);
 }

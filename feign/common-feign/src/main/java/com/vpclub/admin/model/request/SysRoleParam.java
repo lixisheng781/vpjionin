@@ -21,11 +21,6 @@ public class SysRoleParam extends BasePageParam {
     private String roleName;
 
     /**
-     * 备注
-     */
-    private String remark;
-
-    /**
      * 创建人
      */
     private Long createdBy;

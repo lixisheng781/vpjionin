@@ -1,6 +1,5 @@
 package com.vpclub.admin.client;
 
-import com.vpclub.admin.entity.RoleMenuInfoEntity;
 import com.vpclub.admin.entity.RoleOfficeInfoEntity;
 import com.vpclub.result.Result;
 import org.springframework.http.MediaType;

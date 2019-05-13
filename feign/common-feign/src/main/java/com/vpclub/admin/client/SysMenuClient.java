@@ -1,7 +1,7 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.result.Result;
-import com.vpclub.admin.entity.SysMenuEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,24 +23,24 @@ public interface SysMenuClient {
      * @param parentId 父菜单ID
      */
     @RequestMapping(value = "queryListParentId",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    List<SysMenuEntity> queryListParentId(@RequestBody Long parentId);
+    List<MenuBaseInfoEntity> queryListParentId(@RequestBody Long parentId);
 
     /**
      * 获取不包含按钮的菜单列表
      */
     @RequestMapping(value = "queryNotButtonList",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    List<SysMenuEntity> queryNotButtonList();
+    List<MenuBaseInfoEntity> queryNotButtonList();
 
     /**
      * 获取用户菜单列表
      */
     @RequestMapping(value = "getUserMenuList")
-    List<SysMenuEntity> getUserMenuList(@RequestParam("userId") Long userId);
+    List<MenuBaseInfoEntity> getUserMenuList(@RequestParam("userId") Long userId);
     /**
      * 获取角色菜单列表
      */
     @RequestMapping(value = "getRoleMenuList")
-    List<SysMenuEntity> getRoleMenuList(@RequestParam("roleId") Long roleId);
+    List<MenuBaseInfoEntity> getRoleMenuList(@RequestParam("roleId") Long roleId);
 
     /**
      * 删除
@@ -49,14 +49,14 @@ public interface SysMenuClient {
     void delete(@RequestBody Long menuId);
 
     @RequestMapping(value = "/selectList" ,method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    List<SysMenuEntity> selectList(SysMenuEntity sysMenuEntity);
+    List<MenuBaseInfoEntity> selectList(MenuBaseInfoEntity menuBaseInfoEntity);
 
     @RequestMapping(value = "/selectById",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    SysMenuEntity selectById(@RequestBody Long parentId);
+    MenuBaseInfoEntity selectById(@RequestBody Long parentId);
 
     @RequestMapping(value = "/insert",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result insert(@RequestBody SysMenuEntity menu);
+    Result insert(@RequestBody MenuBaseInfoEntity menu);
 
     @RequestMapping(value = "/updateById",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    Result updateById(@RequestBody SysMenuEntity menu);
+    Result updateById(@RequestBody MenuBaseInfoEntity menu);
 }

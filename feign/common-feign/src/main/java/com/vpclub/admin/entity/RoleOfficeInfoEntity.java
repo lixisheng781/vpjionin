@@ -1,5 +1,6 @@
 package com.vpclub.admin.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
@@ -14,14 +15,15 @@ public class RoleOfficeInfoEntity implements Serializable {
      *
      */
     @TableId(value = "rei_seq")
-    private Long reieq;
-    /**S
-     *
+    private Long roleOfficeInfoId;
+    /**
+     * 角色id
      */
-    @TableId(value = "rbi_id")
+    @TableField("rbi_id")
     private Long roleId;
     /**
-     *
+     * 机构id
      */
-    private Long ubiId;
+    @TableField("ubi_id")
+    private Long organizationId;
 }
