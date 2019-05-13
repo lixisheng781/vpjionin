@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Created by chentao on 2018/6/4.
+ *
  */
 @RestController
 public class UserRoleInfoClientImpl implements SysUserRoleClient {
