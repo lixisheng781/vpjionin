@@ -52,7 +52,7 @@ public class RoleBaseInfoClientImpl implements RoleBaseInfoClient {
     public List<RoleBaseInfoEntity> selectByParam(@RequestBody RoleBaseInfoEntity roleBaseInfoEntity) {
         EntityWrapper<RoleBaseInfoEntity> ew = new EntityWrapper<>();
 
-        ew.eq("deleted", "1");
+        ew.eq("del_flag", 0);
 
         return roleBaseInfoService.selectList(ew);
     }

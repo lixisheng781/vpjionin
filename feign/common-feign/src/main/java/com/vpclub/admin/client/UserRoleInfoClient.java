@@ -1,5 +1,6 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.model.request.SysRoleParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +23,6 @@ public interface UserRoleInfoClient {
     /**
      * 根据角色ID数组，批量删除
      */
-  /*  @RequestMapping(value = "deleteBatch")
-    int deleteBatch( SysRoleParam params);*/
+    @RequestMapping(value = "deleteBatch")
+    int deleteBatch( SysRoleParam params);
 }

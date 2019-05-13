@@ -53,7 +53,6 @@ public class SysUserInfoController extends AbstractController {
     }
 
 
-
     /**
      * 修改登录用户密码
      */
@@ -97,7 +96,7 @@ public class SysUserInfoController extends AbstractController {
                 return result;
             }
         } catch (Exception e) {
-            log.error("错误日志 ：",e);
+            log.error("错误日志 ：", e);
             return ResponseResult.failResult(ResultCodeEnum.SERVER_ERROR);
         }
     }
@@ -106,7 +105,7 @@ public class SysUserInfoController extends AbstractController {
      * 用户信息
      */
     @PostMapping("/querUserinfo")
-    public Result info(@RequestBody SysUserParam param){
+    public Result info(@RequestBody SysUserParam param) {
         SysUserInfoEntity user = sysUserInfoService.selectById(param.getUserId());
 
         //获取用户所属的角色列表
@@ -134,7 +133,7 @@ public class SysUserInfoController extends AbstractController {
         try {
             ValidatorUtils.validateEntity(user, UpdateGroup.class);
 
-            if (user.getUserId() == null){
+            if (user.getUserId() == null) {
                 return ResponseResult.failResult(ResultCodeEnum.SERVER_ERROR, "操作用户id不能为空");
             }
 
@@ -143,7 +142,7 @@ public class SysUserInfoController extends AbstractController {
 
             return ResponseResult.success();
         } catch (Exception e) {
-            log.error("错误日志 ：",e);
+            log.error("错误日志 ：", e);
             return ResponseResult.failResult(ResultCodeEnum.SERVER_ERROR, "修改用户失败");
         }
     }
@@ -154,17 +153,18 @@ public class SysUserInfoController extends AbstractController {
     @PostMapping("/delete")
     public Result delete(@RequestBody SysUserParam param) {
         List<Long> userIds = param.getIdList();
-        if (userIds.contains(10000000)) {
-            return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST, "系统管理员不能删除");
-        }
+        for (Long userId : userIds) {
+            if (userRoleInfoService.queryRoleIdList(userId).contains(1)) {
+                return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST, "系统管理员不能删除");
+            }
 
 //        if (userIds.contains(1)) {
 //            return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST, "当前用户不能删除");
 //        }
 
-        sysUserInfoService.deleteByUserId(param);
+            sysUserInfoService.deleteByUserId(param);
 
+        }
         return ResponseResult.success();
     }
-
 }

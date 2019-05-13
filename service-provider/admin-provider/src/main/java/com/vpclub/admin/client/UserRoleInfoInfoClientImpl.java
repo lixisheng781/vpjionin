@@ -1,7 +1,9 @@
 package com.vpclub.admin.client;
 
+import com.vpclub.admin.model.request.SysRoleParam;
 import com.vpclub.admin.service.UserRoleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,10 +27,10 @@ public class UserRoleInfoInfoClientImpl implements UserRoleInfoClient {
         return userRoleInfoService.queryRoleIdList(userId);
     }
 
-   /* @Override
+    @Override
     public int deleteBatch(@RequestBody SysRoleParam params) {
         List<Long> roleIds  = params.getRoleIds();
         Long[] ids = (Long[]) roleIds.toArray();
-        return sysUserRoleService.deleteBatch(ids);
-    }*/
+        return userRoleInfoService.deleteBatch(ids);
+    }
 }
