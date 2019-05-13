@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="queryNotButtonList" resultType="com.vpclub.admin.entity.MenuBaseInfoEntity">
-		select * from menu_base_info where menu_type != 3 order by sortno asc
+		select * from menu_base_info where mbi_type != 3 order by sortno asc
 	</select>
 
 </mapper>
