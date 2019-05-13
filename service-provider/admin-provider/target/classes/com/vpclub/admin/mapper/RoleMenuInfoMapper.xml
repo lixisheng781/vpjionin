@@ -5,7 +5,13 @@
 
 <mapper namespace="com.vpclub.admin.dao.RoleMenuInfoDao">
     <select id="queryMenuIdList" resultType="long">
-		select mbi_id from role_menu_info where rbi_id = #{value}
+		select mbi_id from role_menu_info where rbi_id= #{value}
 	</select>
 
+	<delete id="deleteBatch">
+		delete from role_menu_info where rbi_id in
+		<foreach item="roleId" collection="array" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
 </mapper>

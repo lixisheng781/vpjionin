@@ -12,40 +12,31 @@
 
 	<!-- 查询用户的所有菜单ID --> 
 	<select id="queryAllMenuId" resultType="long">
-		select distinct rm.menu_id from sys_user_role ur 
-			LEFT JOIN sys_role_menu rm on ur.rbi_id = rm.rbi_id
-		where ur.user_id = #{userId}
+		select distinct rm.menu_id from user_role_info ur
+			LEFT JOIN role_menu_info rm on ur.rbi_id = rm.rbi_id
+		where ur.uui_id = #{userId}
 	</select>
 	
 	<select id="queryByUserName" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
-		select * from sys_user where username = #{username} and deleted = 1
+		select * from sys_user_info where login_name = #{loginName} and del_flag = 0
 	</select>
-
-	<!-- 查询主账户下所有子账号 -->
-	<select id="queryByParentId" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
-		SELECT * from sys_user_info where parent_id = {parentId}
-	</select>
-
 
 	<!-- 根据key，更新value -->
 	<update id="deleteByUserIds" parameterType="java.util.ArrayList">
 		<foreach collection="list" item="item" index="index">
 			update sys_user_info
 			<set>
-				deleted=2
+				del_flag=1
 			</set>
-			where user_id = ${item};
+			where uui_num = ${item};
 		</foreach>
 	</update>
 
-	<insert id="addUser" parameterType="com.vpclub.admin.entity.SysUserInfoEntity">
-		insert into sys_user_info(user_id,parent_id,username,password,salt,mobile,create_user_id,created_time)
-		 VALUES (#{userId},#{parentId},#{username},#{password},#{salt},#{mobile},#{createUserId},#{createdTime})
-	</insert>
-
 	<select id="page" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
-		SELECT u.* FROM sys_user_info u
-
+		SELECT r.rbi_name as roleName,u.* FROM sys_user_info u
+		LEFT JOIN user_role_info ur on u.uui_num = ur.uui_id
+		LEFT JOIN role_base_info r on ur.rbi_id = r.rbi_num
+		WHERE u.del_flag =0
 	</select>
 
 </mapper>

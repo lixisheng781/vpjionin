@@ -48,7 +48,7 @@ spring:
   #数据库源设置
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.0.0.43:3306/join_sys_config?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://10.0.0.149:3306/join_sys_config?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     druid:

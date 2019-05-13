@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -268,6 +269,17 @@ public class SysUserInfoEntity extends Model<SysUserInfoEntity> {
     @TableField("uui_zy_mc")
     private String uuiZyMc;
 
+    /**
+     * 角色名称
+     */
+    @TableField(exist = false)
+    private String roleName;
+
+    /**
+     * 角色ID列表
+     */
+    @TableField(exist = false)
+    private List<Long> roleIdList;
 
     @Override
     protected Serializable pkVal() {

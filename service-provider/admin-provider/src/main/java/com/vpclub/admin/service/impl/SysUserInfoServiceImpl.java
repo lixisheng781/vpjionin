@@ -138,11 +138,6 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		this.insert(registerUser);
 	}
 
-	@Override
-	public List<SysUserInfoEntity> queryByParentId(String parentId) {
-		return baseMapper.queryByParentId(parentId);
-	}
-
     @Override
 	public SysUserInfoEntity queryByPhone(SysUserInfoEntity mobileuser) {
 		EntityWrapper<SysUserInfoEntity> condition = new EntityWrapper<SysUserInfoEntity>((SysUserInfoEntity) mobileuser);

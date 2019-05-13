@@ -10,7 +10,10 @@ import java.util.Date;
 
 /**
  * 学生组织隶属变更日志表
- *
+ * 
+ * @author liwenlong
+ * @email liwenlong@gmail.com
+ * @date 2019-03-03 17:42:09
  */
 @Data
 @TableName("org_logs_info")

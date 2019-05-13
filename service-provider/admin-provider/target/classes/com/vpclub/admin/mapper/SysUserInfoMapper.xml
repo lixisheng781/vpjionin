@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huake.modules.app.dao.SysUserInfoDao">
 
+<mapper namespace="com.vpclub.admin.dao.SysUserInfoDao">
+	<!-- 查询用户的所有权限 -->
+	<select id="queryAllPerms" resultType="string">
+		select m.mbi_permission from user_role_info ur
+			LEFT JOIN role_menu_info rm on ur.rbi_id = rm.rbi_id
+			LEFT JOIN menu_base_info m on rm.mbi_id = m.mbi_num
+		where ur.uui_id = #{userId}
+	</select>
+
+	<!-- 查询用户的所有菜单ID --> 
+	<select id="queryAllMenuId" resultType="long">
+		select distinct rm.menu_id from user_role_info ur
+			LEFT JOIN role_menu_info rm on ur.rbi_id = rm.rbi_id
+		where ur.uui_id = #{userId}
+	</select>
+	
+	<select id="queryByUserName" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
+		select * from sys_user_info where login_name = #{loginName} and del_flag = 0
+	</select>
+
+	<!-- 根据key，更新value -->
+	<update id="deleteByUserIds" parameterType="java.util.ArrayList">
+		<foreach collection="list" item="item" index="index">
+			update sys_user_info
+			<set>
+				del_flag=1
+			</set>
+			where uui_num = ${item};
+		</foreach>
+	</update>
+
+	<select id="page" resultType="com.vpclub.admin.entity.SysUserInfoEntity">
+		SELECT r.rbi_name as roleName,u.* FROM sys_user_info u
+		LEFT JOIN user_role_info ur on u.uui_num = ur.uui_id
+		LEFT JOIN role_base_info r on ur.rbi_id = r.rbi_num
+		WHERE u.del_flag =0
+	</select>
 
 </mapper>

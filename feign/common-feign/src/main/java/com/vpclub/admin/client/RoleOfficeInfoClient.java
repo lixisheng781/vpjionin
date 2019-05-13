@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author  yk
  * @since  2018-06-01
  */
-@RequestMapping(value = "/roleOfficeInfoService")
+@RequestMapping(value = "/roleOfficeInfoClient")
 public interface RoleOfficeInfoClient {
 
     @RequestMapping(value = "save",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)

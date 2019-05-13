@@ -3,11 +3,11 @@
 
 <mapper namespace="com.vpclub.admin.dao.SysMenuDao">
 
-	<select id="queryListParentId" resultType="com.vpclub.admin.entity.SysMenuEntity">
+	<select id="queryListParentId" resultType="com.vpclub.admin.entity.MenuBaseInfoEntity">
 		select * from sys_menu where parent_id = #{parentId} order by order_num asc
 	</select>
 
-	<select id="queryNotButtonList" resultType="com.vpclub.admin.entity.SysMenuEntity">
+	<select id="queryNotButtonList" resultType="com.vpclub.admin.entity.MenuBaseInfoEntity">
 		select * from sys_menu where menu_type != 2 order by order_num asc
 	</select>
 

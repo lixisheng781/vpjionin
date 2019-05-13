@@ -10,7 +10,7 @@ import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.admin.model.request.SysMenuParam;
 import com.vpclub.admin.model.response.MenuResponse;
 import com.vpclub.admin.service.ShiroService;
-import com.vpclub.admin.service.SysMenuService;
+import com.vpclub.admin.service.MenuBaseInfoService;
 import com.vpclub.admin.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +27,7 @@ import java.util.List;
 public class SysMenuController extends AbstractController {
 
 	@Autowired
-	private SysMenuService sysMenuService;
+	private MenuBaseInfoService sysMenuService;
 
 	@Autowired
 	private ShiroService shiroService;
@@ -39,11 +39,11 @@ public class SysMenuController extends AbstractController {
 	public Result nav(@RequestParam("roleId") Long roleId) {
 		Result result = new Result();
 		//List<MenuBaseInfoEntity> menuList = sysMenuService.getUserMenuList(userId);
-		List<MenuBaseInfoEntity> menuList = sysMenuService.getRoleMenuList(roleId);
+		//List<MenuBaseInfoEntity> menuList = sysMenuService.getRoleMenuList(roleId);
 		//Set<String> permissions = shiroService.getUserPermissions(getUserId());
 
 		MenuResponse menuResponse = new MenuResponse();
-		menuResponse.setMenuList(menuList);
+		//menuResponse.setMenuList(menuList);
 		//menuResponse.setPermissions(permissions);
 
 		result = ResponseResult.success(menuResponse);

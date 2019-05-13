@@ -18,7 +18,7 @@ import java.util.List;
  * @author  yk
  * @since  2018-06-01
  */
-@RequestMapping(value = "/roleMenuInfoService")
+@RequestMapping(value = "/roleMenuInfoClient")
 public interface RoleMenuInfoClient {
 
     /**

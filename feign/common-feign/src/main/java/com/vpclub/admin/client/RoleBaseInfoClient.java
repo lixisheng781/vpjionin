@@ -18,7 +18,7 @@ import java.util.List;
  * @author  yk
  * @since  2018-06-01
  */
-@RequestMapping(value = "/sysRoleService")
+@RequestMapping(value = "/roleBaseInfoClient")
 public interface RoleBaseInfoClient {
 
     @RequestMapping(value = "queryPage",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)

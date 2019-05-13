@@ -34,17 +34,6 @@ public interface SysUserInfoDao extends BaseMapper<SysUserInfoEntity> {
 	SysUserInfoEntity queryByUserName(String username);
 
 	void deleteByUserIds(List<Long> ids);
-
-	/**
-	 * 添加新用户
-	 */
-	void addUser(SysUserInfoEntity userEntity);
-
-	/**
-	 * 查询主账号下所有子账号
-	 */
-	List<SysUserInfoEntity> queryByParentId(String parentId);
-
 	/**
 	 * 分页查询用户列表
 	 */
