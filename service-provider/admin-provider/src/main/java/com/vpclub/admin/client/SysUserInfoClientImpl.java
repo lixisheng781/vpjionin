@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Created by chentao on 2018/5/31.
  */
 @RestController
 public class SysUserInfoClientImpl implements SysUserInfoClient {
