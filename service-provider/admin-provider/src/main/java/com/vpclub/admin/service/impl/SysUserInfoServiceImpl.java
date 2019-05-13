@@ -1,6 +1,10 @@
 package com.vpclub.admin.service.impl;
 
 import com.vpclub.admin.entity.SysUserInfoEntity;
+import com.vpclub.admin.entity.UserRoleInfoEntity;
+import com.vpclub.admin.service.RoleBaseInfoService;
+import com.vpclub.admin.service.UserRoleInfoService;
+import com.vpclub.admin.utils.Constant;
 import com.vpclub.result.ResponseResult;
 import com.vpclub.result.Result;
 import com.vpclub.result.ResultCodeEnum;
@@ -13,10 +17,12 @@ import com.vpclub.admin.service.SysUserInfoService;
 import com.vpclub.admin.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,6 +34,10 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 @Slf4j
 public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserInfoEntity> implements SysUserInfoService {
+	@Autowired
+	private UserRoleInfoService userRoleInfoService;
+	@Autowired
+	private RoleBaseInfoService roleBaseInfoService;
 
 //	@Resource
 //	JavaMailSender jms;
@@ -45,7 +55,7 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		EntityWrapper<SysUserInfoEntity> ew = new EntityWrapper<>();
 		ew.like(StringUtil.isNotEmpty(params.getUsername()), "username", params.getUsername());
 //		ew.eq(StringUtil.isNotEmpty(params.getMobile()),"mobile",params.getMobile());
-		ew.eq("delFlag",1);
+		ew.eq("delFlag",0);
 		Page<SysUserInfoEntity> selectPage = this.selectPage(page, ew);
 		return ResponseResult.success(selectPage);
 	}
@@ -70,9 +80,11 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		String username = user.getUuiName();
 		SysUserInfoEntity sysUserInfoEntity = this.queryByUserName(username);
 		if(sysUserInfoEntity !=null){
-			return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"该用户名已存在！");
+			return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"该用户已存在！");
 		}
-		Long nowTime = System.currentTimeMillis();
+		Date nowTime = new Date();
+		user.setCreateDate(nowTime);
+		user.setUpdateDate(nowTime);
 		//sha256加密
 		//String salt = RandomStringUtils.randomAlphanumeric(20);
 		String password = DigestUtils.sha1Hex(user.getPassword().trim()).toUpperCase();
@@ -83,6 +95,8 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		//检查角色是否越权
 		//checkRole((SysUserInfoEntity) user);
 
+		//保存用户与角色关系
+		userRoleInfoService.saveOrUpdate(user.getUserId(), user.getRoleIdList());
 			return ResponseResult.success();
 	}
 
@@ -120,13 +134,29 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 	 * 检查角色是否越权
 	 */
 	private void checkRole(SysUserInfoEntity user){
+		if(user.getRoleIdList() == null || user.getRoleIdList().size() == 0){
+			return;
+		}
+		//如果不是超级管理员，则需要判断用户的角色是否自己创建
+		if(user.getCreateId() == Constant.SUPER_ADMIN){
+			return ;
+		}
 
+		//查询用户创建的角色列表
+		List<Long> roleIdList = roleBaseInfoService.queryRoleIdList(user.getCreateId());
+
+		//判断是否越权
+		if(!roleIdList.containsAll(user.getRoleIdList())){
+			log.error("新增用户所选角色，不是本人创建");
+		}
 	}
 
 	@Override
 	public void deleteByUserId(List<Long> ids) {
 		//删除关联表记录
-
+		EntityWrapper<UserRoleInfoEntity> ew = new EntityWrapper<>();
+		ew.in("uui_id",ids);
+		userRoleInfoService.delete(ew);
 
 		baseMapper.deleteByUserIds(ids);
 
