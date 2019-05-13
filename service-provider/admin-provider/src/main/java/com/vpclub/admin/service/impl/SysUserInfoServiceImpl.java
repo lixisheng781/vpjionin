@@ -114,7 +114,7 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		//检查角色是否越权
 		//checkRole(sysUserInfoEntity);
 		//保存用户与角色关系
-		//sysUserRoleService.saveOrUpdate(sysUserInfoEntity.getUserId(), sysUserInfoEntity.getRoleIdList(),sysUserInfoEntity.getUpdatedBy());
+		userRoleInfoService.saveOrUpdate(sysUserInfoEntity.getUserId(), sysUserInfoEntity.getRoleIdList());
 	}
 
 	@Override
