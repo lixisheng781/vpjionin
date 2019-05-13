@@ -154,7 +154,7 @@ public class SysUserInfoController extends AbstractController {
     @PostMapping("/delete")
     public Result delete(@RequestBody SysUserParam param) {
         List<Long> userIds = param.getIdList();
-        if (userIds.contains(1)) {
+        if (userIds.contains(10000000)) {
             return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST, "系统管理员不能删除");
         }
 

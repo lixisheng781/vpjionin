@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.shaxian.admin.dao.UserRoleInfoDao">
+<mapper namespace="com.vpclub.admin.dao.UserRoleInfoDao">
 
 	<delete id="deleteBatch">
 		delete from user_role_info where rbi_id in
@@ -15,7 +15,7 @@
 	</select>
 
 
-	<select id="queryRoleList" resultType="com.shaxian.admin.entity.SysRoleEntity">
+	<select id="queryRoleList" resultType="com.vpclub.admin.entity.RoleBaseInfoEntity">
 		select * from role_base_info where rbi_num in ( select rbi_id from user_role_info where uui_id = #{value} )
 	</select>
 </mapper>

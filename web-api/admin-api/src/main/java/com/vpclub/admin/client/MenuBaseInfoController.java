@@ -39,11 +39,11 @@ public class MenuBaseInfoController extends AbstractController {
 	public Result nav(@RequestParam("roleId") Long roleId) {
 		Result result = new Result();
 		//List<MenuBaseInfoEntity> menuList = menuBaseInfoDaoService.getUserMenuList(userId);
-		//List<MenuBaseInfoEntity> menuList = menuBaseInfoDaoService.getRoleMenuList(roleId);
+		List<MenuBaseInfoEntity> menuList = menuBaseInfoService.getRoleMenuList(roleId);
 		//Set<String> permissions = shiroService.getUserPermissions(getUserId());
 
 		MenuResponse menuResponse = new MenuResponse();
-		//menuResponse.setMenuList(menuList);
+		menuResponse.setMenuList(menuList);
 		//menuResponse.setPermissions(permissions);
 
 		result = ResponseResult.success(menuResponse);

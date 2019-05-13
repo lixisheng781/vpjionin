@@ -21,8 +21,10 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vpclub.admin.dao.MenuBaseInfoDao;
 import com.vpclub.admin.entity.MenuBaseInfoEntity;
 import com.vpclub.admin.service.MenuBaseInfoService;
+import com.vpclub.admin.service.RoleMenuInfoService;
 import com.vpclub.admin.service.SysUserInfoService;
 import com.vpclub.admin.utils.Constant;
+import com.vpclub.admin.utils.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +45,8 @@ public class MenuBaseInfoServiceImpl extends ServiceImpl<MenuBaseInfoDao, MenuBa
 
 	@Autowired
 	private SysUserInfoService sysUserInfoService;
-
+	@Autowired
+	private RoleMenuInfoService roleMenuInfoService;
 
 
 	@Override
@@ -85,10 +88,23 @@ public class MenuBaseInfoServiceImpl extends ServiceImpl<MenuBaseInfoDao, MenuBa
 	}
 
 	@Override
+	public List<MenuBaseInfoEntity> getRoleMenuList(Long roleId) {
+		//系统管理员，拥有管理员最高权限
+		if(roleId == Constant.SUPER_ADMIN){
+			return getAllMenuList(null);
+		}
+
+		//角色菜单列表
+		List<Long> menuIdList = roleMenuInfoService.queryMenuIdList(roleId);
+		return getAllMenuList(menuIdList);
+	}
+
+	@Override
 	public void delete(Long menuId){
 		//删除菜单
 		this.deleteById(menuId);
-
+		//删除菜单与角色关联
+		roleMenuInfoService.deleteByMap(new MapUtils().put("mbi_id", menuId));
 	}
 
 	/**

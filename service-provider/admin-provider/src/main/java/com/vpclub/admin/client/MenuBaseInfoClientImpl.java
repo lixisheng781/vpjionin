@@ -42,6 +42,11 @@ public class MenuBaseInfoClientImpl implements MenuBaseInfoClient {
     }
 
     @Override
+    public List<MenuBaseInfoEntity> getRoleMenuList(Long roleId) {
+        return menuBaseInfoService.getRoleMenuList(roleId);
+    }
+
+    @Override
     public void delete(@RequestBody Long menuId) {
         menuBaseInfoService.delete(menuId);
     }

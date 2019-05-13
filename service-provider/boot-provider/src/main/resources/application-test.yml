@@ -143,23 +143,23 @@ spring:
           reset-enable: false
         #aop-patterns: com.tdx.account_service.service.*
 
-  mail:
-    default-encoding: utf-8
-    protocol: smtp
-    host: smtp.163.com
-    port: 465
-    username: tzz_test2019@163.com
-    password: qq405958177
-    properties:
-      mail:
-        smtp:
-          ssl:
-            enable: true
-      smtp:
-        auth: true
-        starttls:
-          enable: true
-          required: true
+#  mail:
+#    default-encoding: utf-8
+#    protocol: smtp
+#    host: smtp.163.com
+#    port: 465
+#    username: tzz_test2019@163.com
+#    password: qq405958177
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            enable: true
+#      smtp:
+#        auth: true
+#        starttls:
+#          enable: true
+#          required: true
 
 
   # Redis配置

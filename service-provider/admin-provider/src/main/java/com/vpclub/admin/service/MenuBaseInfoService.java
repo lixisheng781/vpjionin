@@ -58,6 +58,11 @@ public interface MenuBaseInfoService extends IService<MenuBaseInfoEntity> {
 	List<MenuBaseInfoEntity> getUserMenuList(Long userId);
 
 	/**
+	 * 获取角色菜单列表
+	 */
+	List<MenuBaseInfoEntity> getRoleMenuList(Long roleId);
+
+	/**
 	 * 删除
 	 */
 	void delete(Long menuId);

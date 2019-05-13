@@ -38,6 +38,13 @@ public interface MenuBaseInfoClient {
     List<MenuBaseInfoEntity> getUserMenuList(@RequestParam("userId") Long userId);
 
     /**
+     * 获取角色菜单列表
+     */
+    @RequestMapping(value = "getRoleMenuList")
+    List<MenuBaseInfoEntity> getRoleMenuList(@RequestParam("roleId") Long roleId);
+
+
+    /**
      * 删除
      */
     @RequestMapping(value = "delete",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
