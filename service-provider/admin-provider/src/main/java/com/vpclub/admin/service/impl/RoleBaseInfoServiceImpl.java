@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.vpclub.admin.dao.RoleBaseInfoDao;
 import com.vpclub.admin.entity.RoleBaseInfoEntity;
+import com.vpclub.admin.entity.UserRoleInfoEntity;
 import com.vpclub.admin.model.request.SysRoleParam;
 import com.vpclub.admin.service.RoleBaseInfoService;
 import com.vpclub.admin.service.RoleMenuInfoService;
 import com.vpclub.admin.service.SysUserInfoService;
+import com.vpclub.admin.service.UserRoleInfoService;
 import com.vpclub.admin.utils.Constant;
 import com.vpclub.admin.utils.StringUtil;
 import com.vpclub.result.ResponseResult;
@@ -39,6 +41,8 @@ public class RoleBaseInfoServiceImpl extends ServiceImpl<RoleBaseInfoDao, RoleBa
     @Autowired
     private SysUserInfoService sysUserInfoService;
 
+    @Autowired
+    private UserRoleInfoService userRoleInfoService;
 
     @Override
     public Result queryPage(SysRoleParam params) {
@@ -111,25 +115,24 @@ public class RoleBaseInfoServiceImpl extends ServiceImpl<RoleBaseInfoDao, RoleBa
     @Transactional(rollbackFor = Exception.class)
     public Result deleteBatch(Long[] roleIds) {
 
-//        //查询当前角色下是否有用户
-//        EntityWrapper<SysUserRoleEntity> ew = new EntityWrapper<>();
-//        ew.eq("deleted",1);
-//        ew.in("role_id",roleIds);
-//        List<SysUserRoleEntity> list = sysUserRoleService.selectList(ew);
-//        if(list.size()==0){
+        //查询当前角色下是否有用户
+        EntityWrapper<UserRoleInfoEntity> ew = new EntityWrapper<>();
+        ew.in("rbi_id",roleIds);
+        List<UserRoleInfoEntity> list = userRoleInfoService.selectList(ew);
+        if(list.size()==0){
             //删除角色
             this.deleteBatchIds(Arrays.asList(roleIds));
 
             //删除角色与菜单关联
             roleMenuInfoService.deleteBatch(roleIds);
-//
-//            //删除角色与用户关联
-//           // sysUserRoleService.deleteBatch(roleIds);
-//
+
+            //删除角色与用户关联
+            userRoleInfoService.deleteBatch(roleIds);
+
             return ResponseResult.success();
-//        }else {
-//            return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"当前角色下有用户绑定，请先删除相关用户");
-//        }
+        }else {
+            return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST,"当前角色下有用户绑定，请先删除相关用户");
+        }
     }
 
 
