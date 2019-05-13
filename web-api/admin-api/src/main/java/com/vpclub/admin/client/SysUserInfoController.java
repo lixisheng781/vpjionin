@@ -2,7 +2,7 @@ package com.vpclub.admin.client;
 
 
 import com.vpclub.admin.entity.SysUserInfoEntity;
-import com.vpclub.admin.service.UserRoleInfoService;
+import com.vpclub.admin.service.UserRoleInfoInfoService;
 import com.vpclub.result.ResponseResult;
 import com.vpclub.result.Result;
 import com.vpclub.result.ResultCodeEnum;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +35,7 @@ public class SysUserInfoController extends AbstractController {
     private SysUserInfoService sysUserInfoService;
 
     @Autowired
-    private UserRoleInfoService userRoleInfoService;
+    private UserRoleInfoInfoService userRoleInfoService;
 
 
     /**

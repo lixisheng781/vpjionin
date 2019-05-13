@@ -11,7 +11,7 @@ import java.util.List;
  *
  */
 @RestController
-public class UserRoleInfoClientImpl implements SysUserRoleClient {
+public class UserRoleInfoInfoClientImpl implements UserRoleInfoClient {
     @Autowired
     private UserRoleInfoService userRoleInfoService;
 
