@@ -3,7 +3,7 @@ package com.vpclub.admin.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import org.springframework.stereotype.Repository;
-
+import com.vpclub.admin.entity.*;
 import java.util.List;
 
 /**
