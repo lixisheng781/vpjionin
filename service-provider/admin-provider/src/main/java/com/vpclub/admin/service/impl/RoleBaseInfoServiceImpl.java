@@ -56,7 +56,7 @@ public class RoleBaseInfoServiceImpl extends ServiceImpl<RoleBaseInfoDao, RoleBa
         EntityWrapper<RoleBaseInfoEntity> ew = new EntityWrapper<>();
         ew.like(StringUtil.isNotEmpty(params.getRoleName()), "role_name", params.getRoleName()).eq(StringUtil.isNotEmpty(params.getCreatedBy()), "created_by", params.getCreatedBy());
         Page<RoleBaseInfoEntity> selectPage = this.selectPage(page, ew);
-//		BeanUtils.copyProperties(selectPage,result);
+//		BeanUtils.copyProperties(selectPage,result);12
         result.setData(selectPage);
         return result;
     }
