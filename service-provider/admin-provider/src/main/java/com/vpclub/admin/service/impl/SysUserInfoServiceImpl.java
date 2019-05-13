@@ -53,9 +53,9 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 			page.setSize(params.getPageSize());
 		}
 		EntityWrapper<SysUserInfoEntity> ew = new EntityWrapper<>();
-		ew.like(StringUtil.isNotEmpty(params.getUsername()), "username", params.getUsername());
+		ew.like(StringUtil.isNotEmpty(params.getUsername()), "login_name", params.getUsername());
 //		ew.eq(StringUtil.isNotEmpty(params.getMobile()),"mobile",params.getMobile());
-		ew.eq("delFlag",0);
+		ew.eq("del_flag",0);
 		Page<SysUserInfoEntity> selectPage = this.selectPage(page, ew);
 		return ResponseResult.success(selectPage);
 	}
@@ -127,7 +127,7 @@ public class SysUserInfoServiceImpl extends ServiceImpl<SysUserInfoDao, SysUserI
 		SysUserInfoEntity userEntity = new SysUserInfoEntity();
 		userEntity.setPassword(newPassword);
 		return this.update(userEntity,
-				new EntityWrapper<SysUserInfoEntity>().eq("user_id", userId).eq("password", password));
+				new EntityWrapper<SysUserInfoEntity>().eq("uui_num", userId).eq("login_pwd", password));
 	}
 
 	/**

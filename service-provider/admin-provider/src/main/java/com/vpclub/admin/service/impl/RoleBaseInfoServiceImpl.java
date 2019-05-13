@@ -65,7 +65,7 @@ public class RoleBaseInfoServiceImpl extends ServiceImpl<RoleBaseInfoDao, RoleBa
     @Transactional(rollbackFor = Exception.class)
     public Result save(RoleBaseInfoEntity role) {
         EntityWrapper<RoleBaseInfoEntity> ew = new EntityWrapper<>();
-        ew.eq("role_name", role.getRoleName());
+        ew.eq("rbi_name", role.getRoleName());
         RoleBaseInfoEntity roleBaseInfoEntity = this.selectOne(ew);
         if (roleBaseInfoEntity != null) {
             return ResponseResult.failResult(ResultCodeEnum.BAD_REQUEST, "该角色名称已存在！");
