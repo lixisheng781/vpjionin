@@ -36,7 +36,7 @@ public class MenuBaseInfoController extends AbstractController {
 	 * 导航菜单
 	 */
 	@PostMapping("/nav")
-	public Result nav(@RequestParam("roleId") Long roleId) {
+	public Result nav(@RequestBody Long roleId) {
 		Result result = new Result();
 		//List<MenuBaseInfoEntity> menuList = menuBaseInfoDaoService.getUserMenuList(userId);
 		List<MenuBaseInfoEntity> menuList = menuBaseInfoService.getRoleMenuList(roleId);
@@ -121,7 +121,7 @@ public class MenuBaseInfoController extends AbstractController {
 	public Result update(@RequestBody MenuBaseInfoEntity menu){
 		Result result = new Result();
 		//数据校验
-		verifyForm(menu);
+		//verifyForm(menu);
 		result = menuBaseInfoService.updateById(menu);
 		return result;
 	}
